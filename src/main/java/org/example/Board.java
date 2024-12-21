@@ -2,6 +2,9 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que representa el tablero del juego Conecta4.
+ */
 public class Board {
     private int filas; // Número de filas del tablero
     private int columnas; // Número de columnas del tablero
@@ -12,14 +15,31 @@ public class Board {
         this.columnas = columnas;
         tablero = new ArrayList<>(columnas);
 
-
+        // Inicializar el tablero con '0' para representar espacios vacíos
         for (int col = 0; col < columnas; col++) {
             List<Character> columna = new ArrayList<>(filas);
             for (int fila = 0; fila < filas; fila++) {
-                columna.add('0');
+                columna.add('0'); // '0' representa espacio vacío
             }
             tablero.add(columna);
         }
+    }
+
+    public boolean placePiece(int columna, Piece piece) {
+        int columnaInterna = columna - 1;
+        if (columnaInterna < 0 || columnaInterna >= columnas) {
+            throw new IllegalArgumentException("Columna fuera de rango");
+        }
+        char ficha = piece.getColor().charAt(0);
+
+        List<Character> columnaSeleccionada = tablero.get(columnaInterna);
+        for (int fila = filas - 1; fila >= 0; fila--) {
+            if (columnaSeleccionada.get(fila) == '0') {
+                columnaSeleccionada.set(fila, ficha);
+                return true;
+            }
+        }
+        return false;
     }
 
     public void printBoard() {
@@ -35,8 +55,7 @@ public class Board {
         }
         System.out.println();
     }
-    //La idea es usar esta funcion despues de que cada pieza se coloque
-    //lo mismo con check vertical, horizontal y diagonal.
+
     public boolean canPlay() {
         for (List<Character> columna : tablero) {
             if (columna.get(0) == '0') { // Verificar si la primera fila está vacía en alguna columna
@@ -45,6 +64,7 @@ public class Board {
         }
         return false;
     }
+
 
     // Getters
     public int getFilas() {

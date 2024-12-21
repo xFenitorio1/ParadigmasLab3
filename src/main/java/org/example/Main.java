@@ -46,7 +46,7 @@ public class Main {
                     board.printBoard();
                     break;
                 case 3:
-                    //realizarJugada(scanner);
+                    realizarJugada(scanner);
                     break;
                 case 4:
                     //verEstadisticas();
@@ -77,7 +77,7 @@ public class Main {
         String nombreJugador2 = scanner.nextLine();
         System.out.print("Ingrese el color del jugador 2: ");
         String colorJugador2 = scanner.nextLine();
-        //System.out.println("Usted tiene el color" + YELLOW_BOLD + " AMARILLO" + RESET);
+        System.out.println("Usted tiene el color" + YELLOW_BOLD + " AMARILLO" + RESET);
         System.out.println("\n--- Configuracion del juego ---");
         System.out.print("Ingrese la cantidad de fichas (4 a 21)    : ");
         fichasPorJugador = scanner.nextInt();
@@ -97,7 +97,27 @@ public class Main {
         System.out.println("\nJuego creado exitosamente");
 
     }
-    private static void realizarJugada(Scanner scanner){/**/}
+    private static void realizarJugada(Scanner scanner){
+        System.out.print("Jugador 1 (" + colorPlayer1.getColor() + "): ");
+        System.out.println("Ingrese la columna en la cual desea colocar la ficha");
+        int columna = scanner.nextInt();
 
-    private static void verEstadisticas(){/**/}
+        board.placePiece(columna, colorPlayer1);
+
+        board.printBoard();
+
+        board.canPlay();
+
+        System.out.print("Jugador 2 (" + colorPlayer2.getColor() + "): ");
+        System.out.println("Ingrese la columna en la cual desea colocar la ficha");
+        columna = scanner.nextInt();
+
+        board.placePiece(columna, colorPlayer2);
+
+        board.printBoard();
+
+        board.canPlay();
+
+
+    }
 }
