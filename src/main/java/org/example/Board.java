@@ -2,10 +2,12 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Board {
     private int filas; // Número de filas del tablero
     private int columnas; // Número de columnas del tablero
     private List<List<Character>> tablero; // Tablero representado como lista de listas
+
 
     public Board(int filas, int columnas) {
         this.filas = filas;
@@ -21,7 +23,6 @@ public class Board {
             tablero.add(columna);
         }
     }
-
 
     public boolean placePiece(int columna, Piece piece) {
         int columnaInterna = columna - 1;
@@ -83,5 +84,38 @@ public class Board {
         }
         return null; // No hay ganador
     }
-}
 
+    public String horizontalWin(){
+        for (int fila = filas - 1; fila >= 0; fila--){
+            int contador = 1;
+            char anterior = '0';
+            for (int col = 0; col < columnas ; col++){
+                char actual = tablero.get(col).get(fila);
+                if (actual != '0' && actual == anterior){
+                    contador++;
+                    if (contador == 4){
+                        return String.valueOf(actual);
+                    }
+                }
+                else{
+                    contador = 1;
+                }
+                anterior = actual;
+            }
+        }
+        return null;
+    }
+
+    // Getters
+    public int getFilas() {
+        return filas;
+    }
+
+    public int getColumnas() {
+        return columnas;
+    }
+
+    public List<List<Character>> getTablero() {
+        return tablero;
+    }
+}
