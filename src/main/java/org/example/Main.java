@@ -93,7 +93,6 @@ public class Main {
         colorPlayer1 = new Piece(colorJugador1);
         colorPlayer2 = new Piece(colorJugador2);
 
-
         System.out.println("\nJuego creado exitosamente");
 
     }
@@ -104,6 +103,7 @@ public class Main {
 
         board.placePiece(columna, colorPlayer1);
 
+
         board.printBoard();
 
         board.canPlay();
@@ -113,7 +113,7 @@ public class Main {
         columna = scanner.nextInt();
 
         board.placePiece(columna, colorPlayer2);
-
+        
         board.printBoard();
 
         board.canPlay();

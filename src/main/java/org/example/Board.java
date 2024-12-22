@@ -2,9 +2,6 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Clase que representa el tablero del juego Conecta4.
- */
 public class Board {
     private int filas; // Número de filas del tablero
     private int columnas; // Número de columnas del tablero
@@ -24,6 +21,7 @@ public class Board {
             tablero.add(columna);
         }
     }
+
 
     public boolean placePiece(int columna, Piece piece) {
         int columnaInterna = columna - 1;
@@ -65,17 +63,25 @@ public class Board {
         return false;
     }
 
-
-    // Getters
-    public int getFilas() {
-        return filas;
-    }
-
-    public int getColumnas() {
-        return columnas;
-    }
-
-    public List<List<Character>> getTablero() {
-        return tablero;
+    public String verticalWin() {
+        for (int col = 0; col < columnas; col++) {
+            int contador = 1;
+            char anterior = '0';
+            for (int fila = filas - 1; fila >= 0; fila--) {
+                char actual = tablero.get(col).get(fila);
+                if (actual != '0' && actual == anterior) {
+                    contador++;
+                    if (contador == 4) {
+                        return String.valueOf(actual); // Ganador encontrado
+                    }
+                }
+                else {
+                    contador = 1; // Reinicia el contador
+                }
+                anterior = actual;
+            }
+        }
+        return null; // No hay ganador
     }
 }
+
