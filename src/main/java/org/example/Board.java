@@ -8,7 +8,6 @@ public class Board {
     private int columnas; // Número de columnas del tablero
     private List<List<Character>> tablero; // Tablero representado como lista de listas
 
-
     public Board(int filas, int columnas) {
         this.filas = filas;
         this.columnas = columnas;
@@ -25,13 +24,12 @@ public class Board {
     }
 
     public boolean placePiece(int columna, Piece piece) {
-        int columnaInterna = columna - 1;
-        if (columnaInterna < 0 || columnaInterna >= columnas) {
+        if (columna < 0 || columna >= columnas) {
             throw new IllegalArgumentException("Columna fuera de rango");
         }
         char ficha = piece.getColor().charAt(0);
 
-        List<Character> columnaSeleccionada = tablero.get(columnaInterna);
+        List<Character> columnaSeleccionada = tablero.get(columna);
         for (int fila = filas - 1; fila >= 0; fila--) {
             if (columnaSeleccionada.get(fila) == '0') {
                 columnaSeleccionada.set(fila, ficha);
@@ -105,6 +103,38 @@ public class Board {
         }
         return null;
     }
+
+    public String diagonalWin() {
+        // Verificar las diagonales descendentes (de izquierda a derecha)
+        for (int fila = 0; fila < filas - 3; fila++) {
+            for (int col = 0; col < columnas - 3; col++) {
+                char ficha = tablero.get(col).get(fila);
+                if (ficha != '0' &&
+                        ficha == tablero.get(col + 1).get(fila + 1) &&
+                        ficha == tablero.get(col + 2).get(fila + 2) &&
+                        ficha == tablero.get(col + 3).get(fila + 3)) {
+                    return String.valueOf(ficha);
+                }
+            }
+        }
+
+        // Verificar las diagonales ascendentes (de izquierda a derecha)
+        for (int fila = 3; fila < filas; fila++) {
+            for (int col = 0; col < columnas - 3; col++) {
+                char ficha = tablero.get(col).get(fila);
+                if (ficha != '0' &&
+                        ficha == tablero.get(col + 1).get(fila - 1) &&
+                        ficha == tablero.get(col + 2).get(fila - 2) &&
+                        ficha == tablero.get(col + 3).get(fila - 3)) {
+                    return String.valueOf(ficha);
+                }
+            }
+        }
+
+        return null; // No se encontró ningún ganador en las diagonales
+    }
+
+
 
     // Getters
     public int getFilas() {
