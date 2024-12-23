@@ -24,12 +24,13 @@ public class Board {
     }
 
     public boolean placePiece(int columna, Piece piece) {
-        if (columna < 0 || columna >= columnas) {
+        int columnaInterna = columna - 1;
+        if (columnaInterna < 0 || columnaInterna >= columnas) {
             throw new IllegalArgumentException("Columna fuera de rango");
         }
         char ficha = piece.getColor().charAt(0);
 
-        List<Character> columnaSeleccionada = tablero.get(columna);
+        List<Character> columnaSeleccionada = tablero.get(columnaInterna);
         for (int fila = filas - 1; fila >= 0; fila--) {
             if (columnaSeleccionada.get(fila) == '0') {
                 columnaSeleccionada.set(fila, ficha);
@@ -132,6 +133,27 @@ public class Board {
         }
 
         return null; // No se encontró ningún ganador en las diagonales
+    }
+
+    public String entregarGanador(){
+        String verticalWinner = verticalWin();
+        if (verticalWinner != null){
+            System.out.println("VICTORIA VERTICAL!!!\n");
+            return verticalWinner;
+        }
+
+        String horizontalWinner = horizontalWin();
+        if (horizontalWinner != null){
+            System.out.println("VICTORIA HORIZONTAL!!\n");
+            return horizontalWinner;
+        }
+
+        String diagonalWinner = diagonalWin();
+        if (diagonalWinner != null){
+            System.out.println("VICTORIA DIAGONAL!!\n");
+            return diagonalWinner;
+        }
+        return null;
     }
 
 
