@@ -1,6 +1,6 @@
 package org.example;
 
-public class Player {
+public class Player implements PlayerInterface {
     private int id;
     private String name;
     private String color;
@@ -18,6 +18,18 @@ public class Player {
         this.draws = nDraws;
         this.remainingPieces = nRemainingPieces;
     }
+
+    public void actualizarStats(Player otroJugador, String resultado) {
+        if (resultado.equals("victoria")) {
+            this.wins += 1;  // Incrementar las victorias del jugador actual
+            otroJugador.losses += 1;  // Incrementar las derrotas del otro jugador
+        }
+        else if (resultado.equals("empate")) {
+            this.draws += 1;
+            otroJugador.draws += 1;  // Incrementar los empates del otro jugador
+        }
+    }
+
 
     public int getId() {
         return id;
