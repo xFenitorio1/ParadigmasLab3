@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Game implements GameInterface {
+public class Game implements GameInterface{
     private Board board;
     private Player player1;
     private Player player2;
@@ -13,7 +13,7 @@ public class Game implements GameInterface {
     private Piece colorPlayer1;
     private Piece colorPlayer2;
 
-    public Game(int filas, int columnas, int fichasPorJugador, Player player1, Player player2) {
+    public Game(int filas, int columnas, int fichasPorJugador, Player player1, Player player2){
         this.board = new Board(filas, columnas);
         this.player1 = player1;
         this.player2 = player2;
@@ -43,4 +43,12 @@ public class Game implements GameInterface {
 
         return tableroLleno || sinFichas;
     }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
 }
+
+
+
