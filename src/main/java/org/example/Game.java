@@ -48,6 +48,11 @@ public class Game implements GameInterface{
         return currentPlayer;
     }
 
+    public void boardGetState() {
+        System.out.println("\n### Estado Actual del Tablero ###");
+        board.printBoard(); // Llama a la función existente en la clase Board
+    }
+
 }
 
 
