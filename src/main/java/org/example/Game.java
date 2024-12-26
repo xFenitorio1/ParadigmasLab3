@@ -53,6 +53,23 @@ public class Game implements GameInterface{
         board.printBoard(); // Llama a la función existente en la clase Board
     }
 
+
+    public void endGame(String resultado, Player ganador, Player perdedor) {
+        if (resultado.equals("victoria")) {
+
+            ganador.actualizarStats(perdedor, "victoria");
+            System.out.println("El ganador es " + ganador.getName() + " con el color " + ganador.getColor() + "!");
+        }
+        else if (resultado.equals("empate")) {
+
+            ganador.actualizarStats(perdedor, "empate");
+            System.out.println("El juego termina en empate!");
+        }
+
+        showHistory();
+
+        System.out.println("\nEl juego ha finalizado. No se permiten mas jugadas.");
+    }
 }
 
 
