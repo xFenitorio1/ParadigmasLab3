@@ -19,7 +19,7 @@ application {
     mainClass = 'org.example.Main'
 }
 
-run {
+tasks.named('run') {
     standardInput = System.in
 }
 
